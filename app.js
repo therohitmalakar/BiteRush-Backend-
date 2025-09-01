@@ -9,7 +9,7 @@ import cors from "cors"
 
 connectDb();
 
-const app =  express();
+const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(express.json());
@@ -18,7 +18,7 @@ app.use("/uploads", express.static("uploads"));
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "http://localhost:5174", 
+  "http://localhost:5174",
   "https://bite-rush-rosy.vercel.app",
   "https://bite-rush-backend-git-main-therohitmalakars-projects.vercel.app/"
 ];
@@ -33,6 +33,8 @@ app.use(
       }
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+
   })
 );
 
@@ -41,13 +43,13 @@ app.use(
 //     credentials:true
 // }))
 
-app.use("/user",userRoute);
+app.use("/user", userRoute);
 
 
-app.get('/', (req,res)=>{
-    res.send("hello")
+app.get('/', (req, res) => {
+  res.send("hello")
 })
 
-app.listen(port, ()=>{
-    console.log(`App is running at port ${port}`);
+app.listen(port, () => {
+  console.log(`App is running at port ${port}`);
 })
