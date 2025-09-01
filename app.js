@@ -16,10 +16,29 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static("uploads"));
 
-app.use(cors({
-    origin:"http://localhost:5173",
-    credentials:true
-}))
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174", 
+  "https://bite-rush-rosy.vercel.app"
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
+// app.use(cors({
+//     origin:"http://localhost:5173",
+//     credentials:true
+// }))
 
 app.use("/user",userRoute);
 
