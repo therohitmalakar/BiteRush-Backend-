@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { User } from "../model/user.model.js";
 
 const isAuthenticated = async (req,res,next) =>{
     try{
@@ -10,16 +11,17 @@ const isAuthenticated = async (req,res,next) =>{
             })
         }
         const decode = jwt.verify(token,process.env.SECRET_KEY);
+        const user = await User.findById(decode.userId).select("-password")
         if(!decode){
             return res.status(401).json({
                 message:"Invalid Token",
                 success:false
             })
         }
-        req.id = decode.userId;
+        req.user = user;
         next();
     }
-    catch{
+    catch(error){
         console.error("Authentication error:",error);
         return res.status(403).json({
             message:"Invalid or expired token.",

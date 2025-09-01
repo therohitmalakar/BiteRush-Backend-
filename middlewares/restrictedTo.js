@@ -1,28 +1,23 @@
-import { User } from "../model/user.model.js";
+
 
 const restrictedTo = (...requiredRole) =>{
 
     return async (req,res,next)=>{
         try{
-             console.log('herer')
-            const user = await User.findById(req.id);
-            console.log(user);
-
-            if(!user){
+            
+            if(!req.user){
                 return res.status(404).json({
                     message:"User not found.",
                     success: false,
                 })
             }
 
-            if(!requiredRole.includes(user.role)){
+            if(!requiredRole.includes(req.user.role)){
                 return res.status(403).json({
                     message:"Access Denied:  Only Admins can access",
                     success: false
                 })
             }
-
-            req.user = user;
             next();
         }
         catch(error){
