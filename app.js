@@ -19,7 +19,8 @@ app.use("/uploads", express.static("uploads"));
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174", 
-  "https://bite-rush-rosy.vercel.app"
+  "https://bite-rush-rosy.vercel.app",
+  "https://bite-rush-backend-git-main-therohitmalakars-projects.vercel.app/"
 ];
 
 app.use(
