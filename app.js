@@ -20,7 +20,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "https://bite-rush-rosy.vercel.app",
-  "https://bite-rush-backend-git-main-therohitmalakars-projects.vercel.app/"
+  "https://bite-rush-backend-git-main-therohitmalakars-projects.vercel.app"
 ];
 
 app.use(
@@ -34,12 +34,11 @@ app.use(
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"], // ✅ allow headers
+        allowedHeaders: ["Content-Type", "Authorization"], // ✅ allow headers
 
 
   })
 );
-app.options("*", cors());
 
 // app.use(cors({
 //     origin:"http://localhost:5173",

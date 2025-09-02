@@ -4,7 +4,7 @@ import isAuthenticated from "../middlewares/isAuthenticated.js";
 import restrictedTo from "../middlewares/restrictedTo.js";
 import { getItems, items } from "../controller/item.controller.js";
 import upload from "../utils/multer.js";
-import { makePayment } from "../controller/payment.controller.js";
+import { getBill, makePayment } from "../controller/payment.controller.js";
 import { addToCart, getItemFromCart, removeItemFromCart } from "../controller/cart.controller.js";
 
 const router = express.Router();
@@ -28,6 +28,7 @@ router.get("/me",isAuthenticated,(req,res)=>{
 })
 
 router.post("/payment",makePayment);
+router.get("/bill",getBill);
 
 router.post("/:userId",addToCart);
 router.get("/:userId", getItemFromCart);
