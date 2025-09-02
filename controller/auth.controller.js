@@ -88,6 +88,7 @@ export const login = async (req,res)=>{
     generateToken(res,user,`Welcome back ${user.name}!`)
         
     } catch (error) {
+        console.error("Login error",error.message)
         res.status(500).json({
             message:"Failed to login",
             success:false
